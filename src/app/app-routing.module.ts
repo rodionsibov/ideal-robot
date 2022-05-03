@@ -6,16 +6,20 @@ import { UsersComponent } from './components/users/users.component';
 const routes: Routes = [
   {
     path: 'users',
-    component: UsersComponent
+    component: UsersComponent,
   },
   {
     path: 'user/:uuid',
-    component: UserDetailComponent
-  }
+    component: UserDetailComponent,
+  },
+  {
+    path: '**',
+    redirectTo: 'users',
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
