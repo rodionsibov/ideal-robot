@@ -24,7 +24,7 @@
   </thead>
   <tbody>
     <tr *ngFor="let user of response.results; let i = index">
-      <td>{{ user.uuid }}</td>
+      <td>{{ user.uuid.substring(0, 6) }}</td>
       <td>
         <img
           [src]="user.imageUrl"
@@ -50,3 +50,4 @@
     </tr>
   </tbody>
 </table>
+<div style="margin-bottom: 5rem;"></div>
