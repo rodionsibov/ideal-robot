@@ -14,7 +14,7 @@ export class UsersComponent implements OnInit {
 
   constructor(private userService: UserService) {
     this.response$ = this.userService
-      .getUser(15)
+      .getUser()
       .pipe(tap((val) => console.log(val)));
   }
 

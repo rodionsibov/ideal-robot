@@ -2,5 +2,7 @@
   <div class="card-body">
     <h5>Random User API</h5>
     <p class="card-text">Seed: {{ (response$ | async)?.info?.seed }}</p>
+    <p class="card-text">Results: {{ (response$ | async)?.info?.results }}</p>
+    <p class="card-text">Version: {{ (response$ | async)?.info?.version }}</p>
   </div>
 </div>
