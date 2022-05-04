@@ -6,3 +6,47 @@
     <p class="card-text">Version: {{ (response$ | async)?.info?.version }}</p>
   </div>
 </div>
+<br />
+<table
+  *ngIf="response$ | async as response"
+  class="table table-striped"
+>
+  <thead class="table-light">
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Image</th>
+      <th scope="col">Name</th>
+      <th scope="col">Email</th>
+      <th scope="col">Address</th>
+      <th scope="col">Phone</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let user of response.results; let i = index">
+      <td>{{ user.uuid }}</td>
+      <td>
+        <img
+          [src]="user.imageUrl"
+          height="45"
+          width="45"
+          class="rounded-circle"
+          [alt]="user.firstName"
+        />
+      </td>
+      <td>{{ user.firstName }} {{ user.lastName }}</td>
+      <td>{{ user.email }}</td>
+      <td>{{ user.address }}</td>
+      <td>{{ user.phone }}</td>
+      <td>
+        <button
+          [routerLink]="['/user', user.uuid]"
+          type="button"
+          class="btn btn-primary"
+        >
+          View
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
