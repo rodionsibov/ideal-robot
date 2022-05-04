@@ -1,1 +1,6 @@
-<p>users works!</p>
+<div *ngIf="response$ | async" class="card">
+  <div class="card-body">
+    <h5>Random User API</h5>
+    <p class="card-text">Seed: {{ (response$ | async)?.info?.seed }}</p>
+  </div>
+</div>
