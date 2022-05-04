@@ -13,63 +13,17 @@ export class UserService {
   constructor(private http: HttpClient) {}
 
   // fetch users
-  getUsers(size: number = 10): Observable<ResponseInterface> {
-    return this.http.get<any>(`${this.apiUrl}/?results=${size}`).pipe(
-      map((response: ResponseInterface) => ({
-        info: {
-          ...response.info,
-        },
-        results: response.results.map(
-          (user: any) =>
-            <UserInterface>{
-              uuid: user.login.uuid,
-              firstName: user.name.first,
-              lastName: user.name.last,
-              email: user.email,
-              username: user.login.username,
-              gender: user.gender,
-              address: `${user.location.street.number} ${user.location.street.name} ${user.location.city}, ${user.location.country}`,
-              dateOfBirth: user.dob.date,
-              phone: user.phone,
-              imageUrl: user.picture.medium,
-              coordinate: {
-                latitude: +user.location.coordinates.latitude,
-                logitude: +user.location.coordinates.longitude,
-              },
-            }
-        ),
-      }))
-    );
+  getUsers(size: number = 10): Observable<any> {
+    return this.http
+      .get<any>(`${this.apiUrl}/?results=${size}`)
+      .pipe(map((response) => this.processResponse(response)));
   }
 
   // fetch one user using the user UUID
-  getUser(uuid: number = 1): Observable<ResponseInterface> {
-    return this.http.get<any>(`${this.apiUrl}/?uuid=${uuid}`).pipe(
-      map((response: ResponseInterface) => ({
-        info: {
-          ...response.info,
-        },
-        results: response.results.map(
-          (user: any) =>
-            <UserInterface>{
-              uuid: user.login.uuid,
-              firstName: user.name.first,
-              lastName: user.name.last,
-              email: user.email,
-              username: user.login.username,
-              gender: user.gender,
-              address: `${user.location.street.number} ${user.location.street.name} ${user.location.city}, ${user.location.country}`,
-              dateOfBirth: user.dob.date,
-              phone: user.phone,
-              imageUrl: user.picture.medium,
-              coordinate: {
-                latitude: +user.location.coordinates.latitude,
-                logitude: +user.location.coordinates.longitude,
-              },
-            }
-        ),
-      }))
-    );
+  getUser(uuid: number = 1): Observable<any> {
+    return this.http
+      .get<any>(`${this.apiUrl}/?uuid=${uuid}`)
+      .pipe(map((response) => this.processResponse(response)));
   }
 
   private processResponse(response: ResponseInterface): ResponseInterface {
@@ -86,8 +40,8 @@ export class UserService {
             email: user.email,
             username: user.login.username,
             gender: user.gender,
-            address: `${user.location.street.number} ${user.location.street.name} ${user.location.city}, ${user.location.country}`,
-            dateOfBirth: user.dot.date,
+            address: `${user.location.street.number} ${user.location.street.name} ${user.location.city}, ${user.location.country}, ${user.location.postcode}`,
+            dateOfBirth: user.dob.date,
             phone: user.phone,
             imageUrl: user.picture.medium,
             coordinate: {
