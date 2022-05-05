@@ -12,7 +12,7 @@ import { UserService } from 'src/app/services/user.service';
 export class UserDetailComponent implements OnInit {
   response$: Observable<ResponseInterface>;
   mode: 'edit' | 'locked' = 'locked';
-  buttonText: string = 'Edit';
+  buttonText: 'Save Changes' | 'Edit' = 'Edit';
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -41,5 +41,10 @@ export class UserDetailComponent implements OnInit {
   changeMode(mode?: 'edit' | 'locked'): void {
     console.warn(mode);
     this.mode = this.mode === 'locked' ? 'edit' : 'locked';
+    this.buttonText = this.buttonText === 'Edit' ? 'Save Changes' : 'Edit';
+    if (mode === 'edit') {
+      // logic to update the user on the back end
+      console.log('Updating using on the back end');
+    }
   }
 }
