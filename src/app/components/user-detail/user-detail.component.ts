@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Observable, shareReplay, switchMap, tap } from 'rxjs';
+import { CoordinateInterface } from 'src/app/interfaces/coordinate-interface';
 import { ResponseInterface } from 'src/app/interfaces/response-interface';
 import { UserService } from 'src/app/services/user.service';
 
@@ -45,5 +46,9 @@ export class UserDetailComponent implements OnInit {
       // logic to update the user on the back end
       console.log('Updating using on the back end');
     }
+  }
+
+  loadMap(coordinate: CoordinateInterface): void {
+    
   }
 }
