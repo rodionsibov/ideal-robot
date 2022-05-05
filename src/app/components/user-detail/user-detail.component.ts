@@ -11,6 +11,8 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class UserDetailComponent implements OnInit {
   response$: Observable<ResponseInterface>;
+  mode: 'edit' | 'locked' = 'locked'
+  buttonText: string = 'Edit'
 
   constructor(
     private activatedRoute: ActivatedRoute,
