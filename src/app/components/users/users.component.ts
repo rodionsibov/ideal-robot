@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { map, Observable, tap } from 'rxjs';
+import { map, Observable, shareReplay, tap } from 'rxjs';
 import { ResponseInterface } from 'src/app/interfaces/response-interface';
 import { UserService } from 'src/app/services/user.service';
 
@@ -13,9 +13,10 @@ export class UsersComponent implements OnInit {
   response$: Observable<ResponseInterface>;
 
   constructor(private userService: UserService) {
-    this.response$ = this.userService
-      .getUsers()
-      // .pipe(tap((val) => console.log(val)));
+    this.response$ = this.userService.getUsers().pipe(
+      // tap((val) => console.log(val)),
+      shareReplay(1)
+    );
   }
 
   ngOnInit(): void {

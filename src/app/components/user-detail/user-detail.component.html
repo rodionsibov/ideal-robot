@@ -1,46 +1,82 @@
-<div class="row">
+<div *ngIf="response$ | async as response" class="row">
   <a routerLink="/users" class="mb-3">Back to users</a>
   <div class="col-lg-4">
     <div class="card">
       <div class="card-body">
         <div class="d-flex flex-column align-items-center text-center">
           <img
-            src=""
+            [src]="response.results[0].imageUrl"
             alt=""
             class="rounded-circle p-1 bg-primary"
             width="110"
           />
           <div class="mt-3">
             <h4>Name</h4>
-            <div class="text-secondary mb-1">username</div>
-            <div class="text-muted font-size-sm">ID: 132</div>
+            <div class="text-secondary mb-1">
+              {{ response.results[0].username }}
+            </div>
+            <div class="text-muted font-size-sm">
+              ID: {{ response.results[0].uuid }}
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <div class="col-lg-8">
+  <div class="col-lg-8 mt-3 mt-lg-0">
     <div class="card">
       <div class="card-body">
         <div class="row mb-3">
-          <div class="col-sm-3">
-            <h6 class="mb-0">Last Name</h6>
+          <div class="col-sm-3 form-label">
+            <h6 class="mb-0">{{ response.results[0].firstName }}</h6>
           </div>
           <div class="col-sm-9 text-secondary">
             <input type="text" class="form-control" value="" />
           </div>
         </div>
         <div class="row mb-3">
-          <div class="col-sm-3">
-            <h6 class="mb-0">Date of Birth</h6>
+          <div class="col-sm-3 form-label">
+            <h6 class="mb-0">{{ response.results[0].lastName }}</h6>
           </div>
           <div class="col-sm-9 text-secondary">
             <input type="text" class="form-control" value="" />
           </div>
         </div>
         <div class="row mb-3">
-          <div class="col-sm-3">
-            <h6 class="mb-0">Email</h6>
+          <div class="col-sm-3 form-label">
+            <h6 class="mb-0">{{ response.results[0].dateOfBirth }}</h6>
+          </div>
+          <div class="col-sm-9 text-secondary">
+            <input type="text" class="form-control" value="" />
+          </div>
+        </div>
+        <div class="row mb-3">
+          <div class="col-sm-3 form-label">
+            <h6 class="mb-0">{{ response.results[0].email }}</h6>
+          </div>
+          <div class="col-sm-9 text-secondary">
+            <input type="text" class="form-control" value="" />
+          </div>
+        </div>
+        <div class="row mb-3">
+          <div class="col-sm-3 form-label">
+            <h6 class="mb-0">{{ response.results[0].phone }}</h6>
+          </div>
+          <div class="col-sm-9 text-secondary">
+            <input type="text" class="form-control" value="" />
+          </div>
+        </div>
+        <div class="row mb-3">
+          <div class="col-sm-3 form-label">
+            <h6 class="mb-0">{{ response.results[0].gender }}</h6>
+          </div>
+          <div class="col-sm-9 text-secondary">
+            <input type="text" class="form-control" value="" />
+          </div>
+        </div>
+        <div class="row mb-3">
+          <div class="col-sm-3 form-label">
+            <h6 class="mb-0">{{ response.results[0].address }}</h6>
           </div>
           <div class="col-sm-9 text-secondary">
             <input type="text" class="form-control" value="" />
@@ -50,3 +86,4 @@
     </div>
   </div>
 </div>
+<div style="margin-bottom: 5rem"></div>

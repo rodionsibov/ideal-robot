@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
+import { Observable, shareReplay, switchMap, tap } from 'rxjs';
+import { ResponseInterface } from 'src/app/interfaces/response-interface';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -8,18 +10,29 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./user-detail.component.css'],
 })
 export class UserDetailComponent implements OnInit {
+  response$: Observable<ResponseInterface>;
+
   constructor(
     private activatedRoute: ActivatedRoute,
     private userService: UserService
-  ) {}
+  ) {
+    this.response$ = this.activatedRoute.paramMap.pipe(
+      switchMap((params: ParamMap) => {
+        // console.warn(params.get('uuid')!);
+        return this.userService.getUser(params.get('uuid')!);
+      }),
+      tap((val) => console.log(val)),
+      shareReplay(1)
+    );
+  }
 
   ngOnInit(): void {
-    this.activatedRoute.paramMap.subscribe((params: ParamMap) => {
-      this.userService
-        .getUser(params.get('uuid')!)
-        .subscribe((response: any) => {
-          console.log(response);
-        });
-    });
+    // this.activatedRoute.paramMap.subscribe((params: ParamMap) => {
+    //   this.userService
+    //     .getUser(params.get('uuid')!)
+    //     .subscribe((response: any) => {
+    //       console.log(response);
+    //     });
+    // });
   }
 }
