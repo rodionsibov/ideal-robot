@@ -5,11 +5,6 @@ import { CoordinateInterface } from 'src/app/interfaces/coordinate-interface';
 import { ResponseInterface } from 'src/app/interfaces/response-interface';
 import { UserService } from 'src/app/services/user.service';
 
-import Map from 'ol/Map';
-import View from 'ol/View';
-import TileLayer from 'ol/layer/Tile';
-import OSM from 'ol/source/OSM';
-
 @Component({
   selector: 'app-user-detail',
   templateUrl: './user-detail.component.html',
@@ -62,18 +57,7 @@ export class UserDetailComponent implements OnInit {
   }
 
   loadMap(coordinate: CoordinateInterface): void {
-    const map = new Map({
-      view: new View({
-        center: [coordinate.latitude, coordinate.longitude],
-        zoom: 8,
-      }),
-      layers: [
-        new TileLayer({
-          source: new OSM(),
-        }),
-      ],
-      target: 'map',
-    });
+    
   }
   
   
