@@ -29,91 +29,97 @@
   <div class="col-lg-8 mt-3 mt-lg-0">
     <div class="card">
       <div class="card-body">
-        <div class="row mb-3">
-          <div class="col-sm-3 form-label">
-            <h6 class="mb-0">First Name</h6>
+        <fieldset [disabled]="mode === 'locked'">
+          <div class="row mb-3">
+            <div class="col-sm-3 form-label">
+              <h6 class="mb-0">First Name</h6>
+            </div>
+            <div class="col-sm-9 text-secondary">
+              <input
+                type="text"
+                class="form-control"
+                [value]="response.results[0].firstName"
+              />
+            </div>
           </div>
-          <div class="col-sm-9 text-secondary">
-            <input
-              type="text"
-              class="form-control"
-              [value]="response.results[0].firstName"
-            />
+          <div class="row mb-3">
+            <div class="col-sm-3 form-label">
+              <h6 class="mb-0">Last Name</h6>
+            </div>
+            <div class="col-sm-9 text-secondary">
+              <input
+                type="text"
+                class="form-control"
+                [value]="response.results[0].lastName"
+              />
+            </div>
           </div>
-        </div>
-        <div class="row mb-3">
-          <div class="col-sm-3 form-label">
-            <h6 class="mb-0">Last Name</h6>
+          <div class="row mb-3">
+            <div class="col-sm-3 form-label">
+              <h6 class="mb-0">Date of Birth</h6>
+            </div>
+            <div class="col-sm-9 text-secondary">
+              <input
+                type="text"
+                class="form-control"
+                [value]="response.results[0].dateOfBirth"
+              />
+            </div>
           </div>
-          <div class="col-sm-9 text-secondary">
-            <input
-              type="text"
-              class="form-control"
-              [value]="response.results[0].lastName"
-            />
+          <div class="row mb-3">
+            <div class="col-sm-3 form-label">
+              <h6 class="mb-0">Email</h6>
+            </div>
+            <div class="col-sm-9 text-secondary">
+              <input
+                type="text"
+                class="form-control"
+                [value]="response.results[0].email"
+              />
+            </div>
           </div>
-        </div>
-        <div class="row mb-3">
-          <div class="col-sm-3 form-label">
-            <h6 class="mb-0">Date of Birth</h6>
+          <div class="row mb-3">
+            <div class="col-sm-3 form-label">
+              <h6 class="mb-0">Phone</h6>
+            </div>
+            <div class="col-sm-9 text-secondary">
+              <input
+                type="text"
+                class="form-control"
+                [value]="response.results[0].phone"
+              />
+            </div>
           </div>
-          <div class="col-sm-9 text-secondary">
-            <input
-              type="text"
-              class="form-control"
-              [value]="response.results[0].dateOfBirth"
-            />
+          <div class="row mb-3">
+            <div class="col-sm-3 form-label">
+              <h6 class="mb-0">Gender</h6>
+            </div>
+            <div class="col-sm-9 text-secondary">
+              <input
+                type="text"
+                class="form-control"
+                [value]="response.results[0].gender"
+              />
+            </div>
           </div>
-        </div>
-        <div class="row mb-3">
-          <div class="col-sm-3 form-label">
-            <h6 class="mb-0">Email</h6>
+          <div class="row mb-3">
+            <div class="col-sm-3 form-label">
+              <h6 class="mb-0">Address</h6>
+            </div>
+            <div class="col-sm-9 text-secondary">
+              <input
+                type="text"
+                class="form-control"
+                [value]="response.results[0].address"
+              />
+            </div>
           </div>
-          <div class="col-sm-9 text-secondary">
-            <input
-              type="text"
-              class="form-control"
-              [value]="response.results[0].email"
-            />
-          </div>
-        </div>
-        <div class="row mb-3">
-          <div class="col-sm-3 form-label">
-            <h6 class="mb-0">Phone</h6>
-          </div>
-          <div class="col-sm-9 text-secondary">
-            <input
-              type="text"
-              class="form-control"
-              [value]="response.results[0].phone"
-            />
-          </div>
-        </div>
-        <div class="row mb-3">
-          <div class="col-sm-3 form-label">
-            <h6 class="mb-0">Gender</h6>
-          </div>
-          <div class="col-sm-9 text-secondary">
-            <input
-              type="text"
-              class="form-control"
-              [value]="response.results[0].gender"
-            />
-          </div>
-        </div>
-        <div class="row mb-3">
-          <div class="col-sm-3 form-label">
-            <h6 class="mb-0">Address</h6>
-          </div>
-          <div class="col-sm-9 text-secondary">
-            <input
-              type="text"
-              class="form-control"
-              [value]="response.results[0].address"
-            />
-          </div>
-        </div>
-        <button type="button" class="btn btn-primary px-4 mt-3">
+        </fieldset>
+        <button
+          (click)="changeMode(mode)"
+          type="button"
+          class="btn btn-primary px-4 mt-3"
+        >
           {{ buttonText }}
         </button>
       </div>
@@ -123,7 +129,7 @@
         <div class="card">
           <div class="card-body">
             <h5 class="d-flex align-items-center mb-3">User Location</h5>
-            <div class="border" style="height: 200px;"></div>
+            <div class="border" style="height: 200px"></div>
           </div>
         </div>
       </div>

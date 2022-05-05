@@ -39,7 +39,6 @@ export class UserDetailComponent implements OnInit {
   }
 
   changeMode(mode?: 'edit' | 'locked'): void {
-    console.warn(mode);
     this.mode = this.mode === 'locked' ? 'edit' : 'locked';
     this.buttonText = this.buttonText === 'Edit' ? 'Save Changes' : 'Edit';
     if (mode === 'edit') {
