@@ -1,9 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
-import { Observable, shareReplay, switchMap, tap } from 'rxjs';
+import { map, Observable, shareReplay, switchMap, tap } from 'rxjs';
 import { CoordinateInterface } from 'src/app/interfaces/coordinate-interface';
 import { ResponseInterface } from 'src/app/interfaces/response-interface';
 import { UserService } from 'src/app/services/user.service';
+
+import Map from 'ol/Map';
+import View from 'ol/View';
+import TileLayer from 'ol/layer/Tile';
+import OSM from 'ol/source/OSM';
 
 @Component({
   selector: 'app-user-detail',
@@ -37,6 +42,14 @@ export class UserDetailComponent implements OnInit {
     //       console.log(response);
     //     });
     // });
+    this.response$.subscribe({
+      next: (res) => {
+        this.loadMap(res.results[0].coordinate);
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
   }
 
   changeMode(mode?: 'edit' | 'locked'): void {
@@ -49,6 +62,19 @@ export class UserDetailComponent implements OnInit {
   }
 
   loadMap(coordinate: CoordinateInterface): void {
-    
+    const map = new Map({
+      view: new View({
+        center: [coordinate.latitude, coordinate.longitude],
+        zoom: 8,
+      }),
+      layers: [
+        new TileLayer({
+          source: new OSM(),
+        }),
+      ],
+      target: 'map',
+    });
   }
+  
+  
 }
