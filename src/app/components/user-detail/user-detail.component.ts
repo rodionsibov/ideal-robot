@@ -4,6 +4,7 @@ import { map, Observable, shareReplay, switchMap, tap } from 'rxjs';
 import { CoordinateInterface } from 'src/app/interfaces/coordinate-interface';
 import { ResponseInterface } from 'src/app/interfaces/response-interface';
 import { UserService } from 'src/app/services/user.service';
+import * as Leaflet from 'leaflet';
 
 @Component({
   selector: 'app-user-detail',
@@ -37,14 +38,6 @@ export class UserDetailComponent implements OnInit {
     //       console.log(response);
     //     });
     // });
-    this.response$.subscribe({
-      next: (res) => {
-        this.loadMap(res.results[0].coordinate);
-      },
-      error: (err) => {
-        console.log(err);
-      },
-    });
   }
 
   changeMode(mode?: 'edit' | 'locked'): void {
@@ -57,8 +50,8 @@ export class UserDetailComponent implements OnInit {
   }
 
   loadMap(coordinate: CoordinateInterface): void {
-    
+    const map = Leaflet.map('map', {
+      center: [coordinate.latitude, coordinate.longitude],
+    });
   }
-  
-  
 }
