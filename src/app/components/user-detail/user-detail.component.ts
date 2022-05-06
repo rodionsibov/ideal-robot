@@ -1,14 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
-import { map, Observable, shareReplay, switchMap, tap } from 'rxjs';
+import Map from 'ol/Map';
+import OSM from 'ol/source/OSM';
+import TileLayer from 'ol/layer/Tile';
+import View from 'ol/View';
+import { Observable, shareReplay, switchMap, tap } from 'rxjs';
 import { CoordinateInterface } from 'src/app/interfaces/coordinate-interface';
 import { ResponseInterface } from 'src/app/interfaces/response-interface';
 import { UserService } from 'src/app/services/user.service';
-
-import Map from 'ol/Map';
-import View from 'ol/View';
-import TileLayer from 'ol/layer/Tile';
-import XYZ from 'ol/source/XYZ';
 
 @Component({
   selector: 'app-user-detail',
@@ -42,6 +41,11 @@ export class UserDetailComponent implements OnInit {
     //       console.log(response);
     //     });
     // });
+    this.response$.subscribe({
+      next: (res) => {
+        this.loadMap(res.results[0].coordinate);
+      },
+    });
   }
 
   changeMode(mode?: 'edit' | 'locked'): void {
@@ -58,15 +62,14 @@ export class UserDetailComponent implements OnInit {
       target: 'map',
       layers: [
         new TileLayer({
-          source: new XYZ({
-            url: 'https://{a-c}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-          }),
+          source: new OSM(),
         }),
       ],
       view: new View({
-        center: [0, 0],
+        center: [coordinate.latitude, coordinate.longitude],
         zoom: 2,
       }),
     });
+    console.log(map.getView().getCenter());
   }
 }
