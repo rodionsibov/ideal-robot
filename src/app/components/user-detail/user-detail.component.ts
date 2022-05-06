@@ -1,10 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
+import { Feature } from 'ol';
+import { Point } from 'ol/geom';
+import TileLayer from 'ol/layer/Tile';
+import VectorLayer from 'ol/layer/Vector';
 import Map from 'ol/Map';
 import OSM from 'ol/source/OSM';
-import TileLayer from 'ol/layer/Tile';
+import VectorSource from 'ol/source/Vector';
 import View from 'ol/View';
-import { Observable, shareReplay, switchMap, tap } from 'rxjs';
+import { delay, map, Observable, shareReplay, switchMap, tap } from 'rxjs';
 import { CoordinateInterface } from 'src/app/interfaces/coordinate-interface';
 import { ResponseInterface } from 'src/app/interfaces/response-interface';
 import { UserService } from 'src/app/services/user.service';
@@ -41,7 +45,7 @@ export class UserDetailComponent implements OnInit {
     //       console.log(response);
     //     });
     // });
-    this.response$.subscribe({
+    this.response$.pipe(delay(1000)).subscribe({
       next: (res) => {
         this.loadMap(res.results[0].coordinate);
       },
@@ -64,10 +68,22 @@ export class UserDetailComponent implements OnInit {
         new TileLayer({
           source: new OSM(),
         }),
+        new VectorLayer({
+          source: new VectorSource({
+            features: [
+              new Feature({
+                geometry: new Point([
+                  coordinate.latitude,
+                  coordinate.longitude,
+                ]),
+              }),
+            ],
+          }),
+        }),
       ],
       view: new View({
         center: [coordinate.latitude, coordinate.longitude],
-        zoom: 2,
+        zoom: 4,
       }),
     });
     console.log(map.getView().getCenter());
