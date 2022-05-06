@@ -8,7 +8,7 @@ import Map from 'ol/Map';
 import OSM from 'ol/source/OSM';
 import VectorSource from 'ol/source/Vector';
 import View from 'ol/View';
-import { delay, map, Observable, shareReplay, switchMap, tap } from 'rxjs';
+import { delay, Observable, shareReplay, switchMap, tap } from 'rxjs';
 import { CoordinateInterface } from 'src/app/interfaces/coordinate-interface';
 import { ResponseInterface } from 'src/app/interfaces/response-interface';
 import { UserService } from 'src/app/services/user.service';
