@@ -33,15 +33,10 @@ export class UserDetailComponent implements OnInit {
     // this.activatedRoute.paramMap.subscribe((params: ParamMap) => {
     //   this.userService
     //     .getUser(params.get('uuid')!)
-    //     .subscribe((response: any) => {
+    //     .subscribe((response: ResponseInterface) => {
     //       console.log(response);
     //     });
     // });
-    this.response$.subscribe({
-      next: (res) => {
-        this.loadMap(res.results[0].coordinate)
-      }
-    })
   }
 
   changeMode(mode?: 'edit' | 'locked'): void {
@@ -53,8 +48,5 @@ export class UserDetailComponent implements OnInit {
     }
   }
 
-  loadMap(coordinate: CoordinateInterface): void {
-    
-    
-  }
+  loadMap(coordinate: CoordinateInterface): void {}
 }

@@ -13,7 +13,7 @@ export class UsersComponent implements OnInit {
   response$: Observable<ResponseInterface>;
 
   constructor(private userService: UserService) {
-    this.response$ = this.userService.getUsers().pipe(
+    this.response$ = this.userService.getUsers(15).pipe(
       // tap((val) => console.log(val)),
       shareReplay(1)
     );
