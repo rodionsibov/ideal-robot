@@ -1,5 +1,7 @@
 # UserApiCatalog
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/1381959d-2ad0-4420-b367-92457fd722f3/deploy-status)](https://app.netlify.com/sites/playful-flan-a305aa/deploys)
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.4.
 
 ## Development server

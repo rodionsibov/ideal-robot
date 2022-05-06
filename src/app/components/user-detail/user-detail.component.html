@@ -65,7 +65,7 @@
               <input
                 type="text"
                 class="form-control"
-                [value]="response.results[0].dateOfBirth"
+                [value]="response.results[0].dateOfBirth | date: 'mediumDate'"
               />
             </div>
           </div>
