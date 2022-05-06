@@ -13,16 +13,16 @@ export class UserService {
   constructor(private http: HttpClient) {}
 
   // fetch users
-  getUsers(size: number = 10): Observable<any> {
+  getUsers(size: number = 10): Observable<ResponseInterface> {
     return this.http
-      .get<any>(`${this.apiUrl}/?results=${size}`)
-      .pipe(map((response) => this.processResponse(response)));
+      .get<ResponseInterface>(`${this.apiUrl}/?results=${size}`)
+      .pipe(map(this.processResponse));
   }
 
   // fetch one user using the user UUID
-  getUser(uuid: string): Observable<any> {
+  getUser(uuid: string): Observable<ResponseInterface> {
     return this.http
-      .get<any>(`${this.apiUrl}/?uuid=${uuid}`)
+      .get<ResponseInterface>(`${this.apiUrl}/?uuid=${uuid}`)
       .pipe(map((response) => this.processResponse(response)));
   }
 
