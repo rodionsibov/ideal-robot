@@ -5,6 +5,11 @@ import { CoordinateInterface } from 'src/app/interfaces/coordinate-interface';
 import { ResponseInterface } from 'src/app/interfaces/response-interface';
 import { UserService } from 'src/app/services/user.service';
 
+import Map from 'ol/Map';
+import View from 'ol/View';
+import TileLayer from 'ol/layer/Tile';
+import XYZ from 'ol/source/XYZ';
+
 @Component({
   selector: 'app-user-detail',
   templateUrl: './user-detail.component.html',
@@ -48,5 +53,20 @@ export class UserDetailComponent implements OnInit {
     }
   }
 
-  loadMap(coordinate: CoordinateInterface): void {}
+  loadMap(coordinate: CoordinateInterface): void {
+    const map = new Map({
+      target: 'map',
+      layers: [
+        new TileLayer({
+          source: new XYZ({
+            url: 'https://{a-c}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+          }),
+        }),
+      ],
+      view: new View({
+        center: [0, 0],
+        zoom: 2,
+      }),
+    });
+  }
 }
